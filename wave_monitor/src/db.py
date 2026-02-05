@@ -41,3 +41,4 @@ def read_measurements(conn, beach: str, limit: int = 300):
     rows = cur.fetchall()
     rows.reverse()  # чтобы на графике было по времени слева-направо
     return rows
+говно говно какашка
