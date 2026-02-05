@@ -41,4 +41,25 @@ def read_measurements(conn, beach: str, limit: int = 300):
     rows = cur.fetchall()
     rows.reverse()  # чтобы на графике было по времени слева-направо
     return rows
-говно говно какашка
+def read_latest_for_all_beaches(conn, beaches):
+    """
+    Возвращает словарь:
+    beach -> (ts, wave_index, wave_class) или None, если данных нет.
+    """
+    cur = conn.cursor()
+    result = {}
+
+    for b in beaches:
+        cur.execute(
+            """
+            SELECT ts, wave_index, wave_class
+            FROM wave_data
+            WHERE beach = ?
+            ORDER BY ts DESC
+            LIMIT 1
+            """,
+            (b,),
+        )
+        result[b] = cur.fetchone()  # None или кортеж
+
+    return result
