@@ -84,13 +84,12 @@ with st.sidebar:
 
     st.subheader("Автоподгрузка таблицы")
 
-    toggle = st.button(
-        "⏸ Остановить автоподгрузку" if st.session_state.live_on else "▶️ Запустить автоподгрузку",
-        key="toggle_live"
-    )
+    st.subheader("Автоподгрузка")
 
-    if toggle:
-        st.session_state.live_on = not st.session_state.live_on
+    st.session_state.live_on = st.toggle(
+        "Автоподгрузка данных",
+        value=st.session_state.live_on
+    )
 
     if st.session_state.live_on:
         st.caption("🟢 Автоподгрузка включена")
