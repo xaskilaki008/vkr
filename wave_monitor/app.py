@@ -188,7 +188,7 @@ with m4:
 # ====== График ======
 st.subheader("Изменение волнения во времени")
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(6, 3))
 ax.plot(df["ts"].tail(limit), df["wave_index"].tail(limit))
 ax.set_xlabel("Время")
 ax.set_ylabel("Wave Index (условн.)")
@@ -198,7 +198,9 @@ ax.grid(True)
 ax.xaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
 fig.autofmt_xdate()
 
-st.pyplot(fig, clear_figure=True)
+plot_left, plot_center, plot_right = st.columns([1, 2, 1])
+with plot_center:
+    st.pyplot(fig, clear_figure=True, use_container_width=True)
 
 # ====== “Лента” последних измерений (как чат) ======
 st.subheader("Лента измерений (последние записи)")
